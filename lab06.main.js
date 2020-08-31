@@ -190,26 +190,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
-     this.connector.get((result, error) => {
-         if (result.hasOwnProperty('body')) {
-             const jsonStr = result['body'];
-             const jsonObj= JSON.parse(JSONstr);
-             const arr = jsonObj['result'];
-             const validKeys = ["number", "active", "priority", "description", "work_start", "work_end", "sys_id"];
-             arr.keys().forEach(function(item) {
-                 if (!(item in validKeys)) {
-                     delete arr[item];
-                 }
-                 if (item === 'number') {
-                     arr[item] = "change_ticket_number";
-                 }
-                 if (item === "sys_id") {
-                     arr[item] = "change_ticket_key";
-                 }
-             });
-             result = arr;
-         }
-     });
+     this.connector.get(callback);
   }
 
   /**
@@ -228,26 +209,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-     this.connector.post((result, error) => {
-         if (result.hasOwnProperty('body')) {
-             const jsonStr = result['body'];
-             const jsonObj= JSON.parse(JSONstr);
-             const obj = jsonObj['result'];
-             const validKeys = ["number", "active", "priority", "description", "work_start", "work_end", "sys_id"];
-             obj.keys().forEach(function(item) {
-                 if (!(item in validKeys)) {
-                     delete obj[item];
-                 }
-                 if (item === 'number') {
-                     obj[item] = "change_ticket_number";
-                 }
-                 if (item === "sys_id") {
-                     obj[item] = "change_ticket_key";
-                 }
-             });
-             result = obj;
-         }
-     });
+     this.connector.post(callback);
   }
 }
 
