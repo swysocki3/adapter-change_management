@@ -128,7 +128,7 @@ class ServiceNowConnector {
    if (response.statusCode !== 200 || response.statusCode !== 201) {
        return callback(response, error);
    }
-   return callback(response);
+   return callback(response, error);
 
   }
   /**
